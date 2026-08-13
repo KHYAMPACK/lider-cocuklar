@@ -1,0 +1,23 @@
+---
+description: Display titles use Turkish Title Case — every word starts with a capital letter.
+alwaysApply: true
+---
+
+# Title Case
+
+All visible titles (h1, h2, h3, PageIntro, card titles, section headings) use **Title Case**: every word starts with an uppercase letter, including small words like Ve, İle, Bir, İçin.
+
+Turkish: `i` → `İ`, `ı` → `I`. Do not use sentence case.
+
+Eyebrows stay CSS `uppercase`. Body copy, FAQ questions, and buttons stay sentence case.
+
+```txt
+❌ Güvenli bahçede özgür oyun
+✅ Güvenli Bahçede Özgür Oyun
+
+❌ Uzman branş öğretmenleriyle zengin gün
+✅ Uzman Branş Öğretmenleriyle Zengin Gün
+
+❌ Kayıt nasıl işler?
+✅ Kayıt Nasıl İşler?
+```

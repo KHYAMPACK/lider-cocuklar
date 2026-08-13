@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
+import { EnrollmentSteps } from "@/components/LifeAtSchool";
 import { PageIntro } from "@/components/PageIntro";
+import { pageMetadata } from "@/lib/seo";
 import { site, whatsappLink } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "İletişim",
   description:
     "Lider Çocuklar Anaokulu iletişim: telefon, WhatsApp, e-posta ve Merkezefendi Yenişehir adresi.",
-  alternates: { canonical: "/iletisim" },
-};
+  path: "/iletisim",
+});
 
 export default function ContactPage() {
   return (
     <div>
       <PageIntro eyebrow="Yenişehir · Merkezefendi" title="İletişim">
-        Telefon, WhatsApp veya form — kontenjan ve okul gezisi için yazın.
+        Telefon, WhatsApp veya form — kontenjan, okul gezisi ve kayıt randevusu için yazın.
       </PageIntro>
 
       <div className="container-page py-20 md:py-28">
@@ -65,7 +67,7 @@ export default function ContactPage() {
           </aside>
 
           <div className="rounded-[22px] bg-[var(--foam)] p-6 md:p-8">
-            <h2 className="font-[family-name:var(--font-display)] text-2xl font-extrabold">Mesaj formu</h2>
+            <h2 className="font-[family-name:var(--font-display)] text-2xl font-extrabold">Mesaj Formu</h2>
             <p className="mt-2 text-sm text-[var(--muted)]">Gönderince WhatsApp açılır; mesajınız oraya taşınır.</p>
             <div className="mt-6">
               <ContactForm />
@@ -80,9 +82,12 @@ export default function ContactPage() {
             className="h-[260px] w-full border-0 sm:h-[360px]"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
             allowFullScreen
           />
         </div>
+
+        <EnrollmentSteps />
       </div>
     </div>
   );

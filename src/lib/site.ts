@@ -71,7 +71,7 @@ export const whyCards = [
     icon: "share",
   },
   {
-    title: "Keşif ve Yaratıcılık",
+    title: "Keşif Ve Yaratıcılık",
     text: "Müzik, resim ve atölyelerle çocuğun keşfetmesine alan açıyoruz.",
     color: "#3D7EA6",
     image: "/images/why/create.jpg",
@@ -85,6 +85,111 @@ export const aboutChecks = [
   "Meslek köşeleriyle yaşam becerileri",
   "Enerjiyi olumlu atan oyun alanları",
 ] as const;
+
+export const gardenPlay = {
+  eyebrow: "Açık hava",
+  title: "Güvenli Bahçede Özgür Oyun",
+  accent: "Özgür Oyun",
+  paragraphs: [
+    "Lider Çocuklar’da günün sevilen parçalarından biri bahçe zamanı. Temiz havada koşar, keşfeder ve arkadaşlarıyla oyun kurar; hareket, sosyalleşme ve hayal gücü birlikte büyür.",
+    "Güvenli oyun alanımızda açık hava etkinlikleri, serbest oyun ve doğa ile buluşma — her çocuğun temposuna saygıyla.",
+  ],
+} as const;
+
+export const dayRhythm = {
+  eyebrow: "Günlük ritim",
+  title: "Bir Günün Ritmi",
+  intro: "Çalışan ebeveynler için erken açılış; gün boyu oyun, öğün ve esnek çıkış.",
+  steps: [
+    { time: "07:30", title: "Kapılar Açılır", detail: "Tam gün karşılama", tone: "grape" },
+    { time: "09:00", title: "Gün Başlar", detail: "Oyun ve keşif", tone: "pool" },
+    { time: "", title: "Sofraya Otururuz", detail: "Kahvaltı · kuşluk · öğle · ikindi", tone: "gold" },
+    { time: "13:00", title: "Yarım Gün Çıkış", detail: "İsteğe bağlı", tone: "blush" },
+    { time: "17:00", title: "Esnek Çıkış", detail: "Tercihe göre", tone: "pool" },
+    { time: "18:30", title: "Gün Kapanır", detail: "Tam gün bitiş", tone: "grape" },
+  ],
+} as const;
+
+export const ageGroups = {
+  eyebrow: "Sınıflar",
+  title: "Yaş Grupları",
+  intro: "Küçük gruplar — her yaşa kendi temposu.",
+  bands: [
+    { range: "3 yaş", text: "İlk ayrılık, güven ve oyun. Küçük adımlarla okula alışma." },
+    { range: "4–5 yaş", text: "Keşif, arkadaşlık ve atölye. Merakın günlük işe dönüştüğü yıllar." },
+    { range: "5–6 yaş", text: "Okula hazırlık, sorumluluk ve liderlik. Bir sonraki basamağa yumuşak geçiş." },
+  ],
+} as const;
+
+export const branchTeachers = {
+  eyebrow: "Branşlar",
+  title: "Uzman Branş Öğretmenleriyle Zengin Gün",
+  intro:
+    "Müzikten dramaya, spordan sanata — branş öğretmenlerimiz miniklerin farklı yönlerini destekler.",
+  subjects: [
+    { title: "Müzik", text: "Ritim, ses ve şarkı ile ifade; kulak ve beden uyumu." },
+    { title: "Drama", text: "Hayal gücü, rol oynama ve kendini ifade etme." },
+    { title: "İngilizce", text: "Oyun ve şarkı yoluyla erken dil farkındalığı." },
+    { title: "Jimnastik / Spor", text: "Denge, güç ve beden farkındalığı; hareketle özgüven." },
+    { title: "Dans", text: "Müzik eşliğinde hareket, koordinasyon ve neşe." },
+    { title: "Görsel Sanatlar", text: "Boyama, yoğurma ve yaratıcı üretim; ince motor beceri." },
+    { title: "Akıl Oyunları", text: "Odak, planlama ve sabır — yaşa uygun zihin etkinlikleri." },
+    { title: "Doğa Ve Keşif", text: "Açık hava, duyusal deneyim ve meraka dayalı gözlem." },
+  ],
+} as const;
+
+export const nutrition = {
+  eyebrow: "Sofrada",
+  title: "Doğal Ve Dengeli Beslenme",
+  intro: "Sofrada da öğrenme var — masa alışkanlığı ve birlikte yaşam.",
+  points: [
+    {
+      title: "Taze Öğünler",
+      text: "Hazır atıştırmalık yerine çocuk dostu, taze malzemelerle planlanan menüler.",
+    },
+    {
+      title: "Öğün Düzeni",
+      text: "Tam gün: kahvaltı, kuşluk, öğle ve ikindi. Yarım gün: kahvaltı, kuşluk ve öğle.",
+    },
+    {
+      title: "Sosyalleşme",
+      text: "Yemek zamanı yalnızca beslenme değil; masa alışkanlığı ve birlikte yaşam.",
+    },
+    {
+      title: "Özel İhtiyaç",
+      text: "Alerji ve özel beslenme notlarını kayıt sırasında alıyor, mutfağa iletiyoruz.",
+    },
+  ],
+} as const;
+
+export const enrollment = {
+  eyebrow: "Kayıt",
+  title: "Kayıt Nasıl İşler?",
+  intro: "Kayıt sürecimiz öncelikle randevu ile başlar. Randevu gününde şöyle ilerleriz:",
+  motto: "Çünkü bizim için kayıt, bir form doldurmakla değil; çocuğu tanımakla başlar.",
+  steps: [
+    {
+      n: "01",
+      title: "Aileyi Tanırız",
+      text: "Randevu gününde veliyle birebir görüşerek aileyi tanırız; çocuğun yaşı, gelişimi, günlük rutinleri, ilgi alanları, ihtiyaçları ve varsa önceki okul deneyimi hakkında bilgi alırız.",
+    },
+    {
+      n: "02",
+      title: "Çocukla Tanışırız",
+      text: "Ardından çocukla tanışır, okul ortamındaki iletişimini ve ihtiyaçlarını gözlemleyerek hangi programın ve devam süresinin daha uygun olacağını değerlendiririz.",
+    },
+    {
+      n: "03",
+      title: "Yaklaşımımızı Anlatırız",
+      text: "Bu ilk görüşmede eğitim yaklaşımımız, günlük işleyiş, sınıf düzeni ve programlar hakkında ayrıntılı bilgi verir; merak edilen tüm soruları yanıtlarız.",
+    },
+    {
+      n: "04",
+      title: "Birlikte Karar Veririz",
+      text: "Karşılıklı değerlendirme sonrasında Lider Çocuklar’ın uygun olduğuna birlikte karar verdiğimizde kayıt işlemlerini tamamlar ve uyum sürecini planlarız.",
+    },
+  ],
+} as const;
 
 export const featuredServices = [
   {
@@ -132,7 +237,7 @@ export const upcomingActivities = [
   },
   {
     slug: "orff-ritim",
-    title: "Orff ve Ritim",
+    title: "Orff Ve Ritim",
     kicker: "Müzik",
     text: "Beden, ses ve basit çalgılarla ritim duygusu; müzik bir ders değil, sınıfın nabzı.",
     tone: "gold",
@@ -216,7 +321,11 @@ export const upcomingActivities = [
 export const faqs = [
   {
     q: "Lider Çocuklar Anaokulu hangi yaş gruplarını kabul ediyor?",
-    a: "Okulumuz okul öncesi çocuklara yöneliktir (3–6 yaş). Güncel kontenjan için bizi arayın.",
+    a: "Okulumuz okul öncesi çocuklara yöneliktir (3–6 yaş). Küçük gruplarda her yaşın kendi temposu vardır. Güncel kontenjan için bizi arayın.",
+  },
+  {
+    q: "Günlük saatler ve yarım gün var mı?",
+    a: "Kapılar 07:30’da açılır, tam gün 18:30’da kapanır. İsteğe bağlı yarım gün çıkış 13:00’tedir; esnek çıkış 17:00 civarı tercihe göredir.",
   },
   {
     q: "Okulunuz nerededir?",
@@ -224,30 +333,24 @@ export const faqs = [
   },
   {
     q: "Yemekler nasıl hazırlanıyor?",
-    a: "Beslenme düzenimiz çocuk dostu menülerle planlanır. Alerji ve özel ihtiyaçları kayıt sırasında not ederiz.",
+    a: "Tam günde kahvaltı, kuşluk, öğle ve ikindi; yarım günde kahvaltı, kuşluk ve öğle. Menüler çocuk dostu ve taze planlanır. Alerji ve özel ihtiyaçları kayıt sırasında not ederiz.",
+  },
+  {
+    q: "Kayıt nasıl işler?",
+    a: "Önce randevu alırız. Görüşmede aileyi ve çocuğu tanır, yaklaşımımızı anlatır, birlikte karar veririz. Kayıt bir form değil; çocuğu tanımakla başlar.",
   },
   {
     q: "Eğitim yönteminiz nedir?",
-    a: "Oyun temelli, keşif ve yaratıcılık odaklı bir yaklaşım izliyoruz; bilim, sanat, dil ve meslek köşeleriyle öğrenmeyi hayata bağlıyoruz.",
+    a: "Oyun temelli, keşif ve yaratıcılık odaklı bir yaklaşım izliyoruz; bilim, sanat, dil, branş öğretmenleri ve meslek köşeleriyle öğrenmeyi hayata bağlıyoruz.",
   },
 ] as const;
 
-/** @deprecated kept for programlar page compatibility */
-export const programs = featuredServices.map((s) => ({
-  slug: s.slug,
-  title: s.title,
-  summary: s.text,
-}));
-
 export const photos = {
-  hero: "/images/fairy-classroom.png",
-  about: "/images/play-area.png",
-  hours: "/images/dining-room.png",
-  faq: "/images/brand-wall.png",
   wall: "/images/brand-wall.png",
   dining: "/images/dining-room.png",
   play: "/images/play-area.png",
   classroom: "/images/fairy-classroom.png",
+  garden: "/images/garden.jpg",
 } as const;
 
 export const heroSlides = [

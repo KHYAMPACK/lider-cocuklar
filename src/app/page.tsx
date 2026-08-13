@@ -1,10 +1,20 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ActivityCorridor } from "@/components/ActivityCorridor";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { HomeHero } from "@/components/HomeHero";
+import {
+  AgeGroups,
+  BranchTeachers,
+  DayRhythm,
+  EnrollmentSteps,
+  GardenPlay,
+  Nutrition,
+} from "@/components/LifeAtSchool";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { WhyIcon } from "@/components/WhyIcon";
+import { homeTitle, pageMetadata } from "@/lib/seo";
 import {
   aboutChecks,
   featuredServices,
@@ -13,6 +23,12 @@ import {
   whyCards,
 } from "@/lib/site";
 
+export const metadata: Metadata = pageMetadata({
+  title: homeTitle,
+  description: site.description,
+  path: "/",
+});
+
 export default function HomePage() {
   return (
     <>
@@ -20,12 +36,16 @@ export default function HomePage() {
 
       <ActivityCorridor />
 
+      <GardenPlay />
+
+      <AgeGroups />
+
       <section className="py-24 md:py-32">
         <div className="container-page">
           <ScrollReveal>
             <p className="eyebrow">Neden burada</p>
             <h2 className="mt-3 max-w-2xl font-[family-name:var(--font-display)] text-4xl font-extrabold leading-[0.92] md:text-5xl">
-              Güven, oyun ve keşif aynı çatı altında.
+              Güven, Oyun Ve Keşif Aynı Çatı Altında.
             </h2>
           </ScrollReveal>
 
@@ -62,7 +82,7 @@ export default function HomePage() {
           <ScrollReveal>
             <p className="eyebrow">Başlangıç</p>
             <h2 className="mt-3 font-[family-name:var(--font-display)] text-4xl font-extrabold leading-[0.92] md:text-5xl">
-              Çocuğunuzun hayatındaki en iyi ilk adım.
+              Çocuğunuzun Hayatındaki En İyi İlk Adım.
             </h2>
             <ul className="mt-8 space-y-4">
               {aboutChecks.map((item) => (
@@ -122,20 +142,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden py-24 md:py-32">
-        <Image src={photos.hours} alt="" fill sizes="100vw" className="object-cover" />
-        <div className="absolute inset-0 bg-[var(--grape)]/78" />
-        <div className="relative z-10 mx-auto max-w-[74rem] px-4 text-center text-[var(--foam)] md:px-6">
-          <p className="font-[family-name:var(--font-mono)] text-[0.72rem] uppercase tracking-[0.22em] text-[var(--star)]">
-            Sınıf saatleri
-          </p>
-          <h2 className="mt-4 font-[family-name:var(--font-display)] text-4xl font-extrabold md:text-6xl">Tam gün</h2>
-          <p className="mt-4 font-[family-name:var(--font-mono)] text-3xl tracking-tight text-[var(--star)] md:text-5xl">
-            {site.classHours}
-          </p>
-          <p className="mt-3 text-sm text-white/75">Pazartesi – Cuma · Hafta sonu kapalı</p>
-        </div>
-      </section>
+      <BranchTeachers />
+
+      <DayRhythm />
+
+      <Nutrition />
+
+      <EnrollmentSteps compact />
 
       <section className="py-24 md:py-32">
         <div className="container-page grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
@@ -147,7 +160,7 @@ export default function HomePage() {
           <div>
             <p className="eyebrow">Sorular</p>
             <h2 className="mt-3 font-[family-name:var(--font-display)] text-4xl font-extrabold leading-[0.92] md:text-5xl">
-              Lider Çocuklar hakkında
+              Lider Çocuklar Hakkında
             </h2>
             <div className="mt-8">
               <FaqAccordion />
@@ -160,7 +173,7 @@ export default function HomePage() {
         <div className="container-page">
           <ScrollReveal className="text-center">
             <p className="eyebrow">Konum</p>
-            <h2 className="mt-3 font-[family-name:var(--font-display)] text-4xl font-extrabold md:text-5xl">Bize ulaşın</h2>
+            <h2 className="mt-3 font-[family-name:var(--font-display)] text-4xl font-extrabold md:text-5xl">Bize Ulaşın</h2>
             <div className="mt-5 flex flex-col items-center gap-2 text-sm font-semibold sm:flex-row sm:justify-center sm:gap-3">
               <a href={`tel:${site.phoneTel}`} className="hover:text-[var(--blush)]">
                 {site.phoneDisplay}
@@ -182,6 +195,7 @@ export default function HomePage() {
               className="h-[260px] w-full border-0 sm:h-[360px] md:h-[420px]"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
+              sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
               allowFullScreen
             />
           </div>

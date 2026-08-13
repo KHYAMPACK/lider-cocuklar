@@ -1,18 +1,21 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { PageIntro } from "@/components/PageIntro";
+import { pageMetadata } from "@/lib/seo";
+import { photos, site } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Galeri",
   description: "Lider Çocuklar Anaokulu sınıfları, oyun alanları ve etkinlik mekânlarından fotoğraflar.",
-  alternates: { canonical: "/galeri" },
-};
+  path: "/galeri",
+});
 
-const photos = [
-  { src: "/images/fairy-classroom.png", alt: "Masal temalı pembe sınıf", caption: "Masal sınıfı" },
-  { src: "/images/play-area.png", alt: "Oyun evleri ve trafik köşesi", caption: "Oyun köşeleri" },
-  { src: "/images/dining-room.png", alt: "Yemek salonu", caption: "Yemek salonu" },
-  { src: "/images/brand-wall.png", alt: "Okul marka duvarı", caption: "Okulumuz" },
+const gallery = [
+  { src: photos.classroom, alt: "Masal temalı pembe sınıf", caption: "Masal Sınıfı" },
+  { src: photos.play, alt: "Oyun evleri ve trafik köşesi", caption: "Oyun Köşeleri" },
+  { src: photos.dining, alt: "Yemek salonu", caption: "Yemek Salonu" },
+  { src: photos.wall, alt: "Okul marka duvarı", caption: "Okulumuz" },
+  { src: photos.garden, alt: "Çocuklar bahçede oynuyor", caption: "Bahçe Zamanı" },
 ] as const;
 
 export default function GalleryPage() {
@@ -23,8 +26,15 @@ export default function GalleryPage() {
       </PageIntro>
 
       <div className="container-page py-20 md:py-28">
+        <p className="mb-8 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
+          Fotoğraflar aile izniyle paylaşılır. Tanınabilir bir görüntünün kaldırılmasını istiyorsanız{" "}
+          <a href={`mailto:${site.email}`} className="font-semibold text-[var(--grape)]">
+            {site.email}
+          </a>{" "}
+          adresine yazın.
+        </p>
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
-          {photos.map((photo, i) => (
+          {gallery.map((photo, i) => (
             <figure key={photo.src} className={`overflow-hidden rounded-[22px] ${i === 0 ? "sm:col-span-2" : ""}`}>
               <div className={`relative ${i === 0 ? "aspect-[16/8]" : "aspect-[4/3]"}`}>
                 <Image

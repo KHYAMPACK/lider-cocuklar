@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageIntro } from "@/components/PageIntro";
+import { pageMetadata } from "@/lib/seo";
 import { faqs, site } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Sık Sorulan Sorular",
   description: "Lider Çocuklar Anaokulu SSS: yaş grubu, günlük program, yemek ve adres.",
-  alternates: { canonical: "/sss" },
-};
+  path: "/sss",
+});
 
 export default function FaqPage() {
   return (
     <div>
-      <PageIntro eyebrow="Bilgi" title="Sık sorulan sorular">
+      <PageIntro eyebrow="Bilgi" title="Sık Sorulan Sorular">
         Yaş grubu, adres, yemek ve eğitim yaklaşımı.
       </PageIntro>
 

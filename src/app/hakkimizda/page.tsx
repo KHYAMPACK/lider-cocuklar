@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { AgeGroups, GardenPlay, Nutrition } from "@/components/LifeAtSchool";
 import { PageIntro } from "@/components/PageIntro";
+import { pageMetadata } from "@/lib/seo";
 import { aboutIntro, aboutMore, site } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Hakkımızda",
   description:
     "Özel Denizli Lider Çocuklar Anaokulu: M.E.B ve İSO9001 uyumlu, 3–6 yaşa özel, oyun ve atölye odaklı okul öncesi eğitim.",
-  alternates: { canonical: "/hakkimizda" },
-};
+  path: "/hakkimizda",
+});
 
 export default function AboutPage() {
   return (
@@ -46,6 +48,10 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
+
+      <GardenPlay />
+      <AgeGroups />
+      <Nutrition />
     </div>
   );
 }

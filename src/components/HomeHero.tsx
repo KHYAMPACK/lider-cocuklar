@@ -1,47 +1,96 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/Logo";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { aboutIntro, aboutMore, heroSlides, photos, site, whatsappLink } from "@/lib/site";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(useGSAP, ScrollTrigger);
-}
-
-function HeroSlideshow() {
+function HeroSlideshow({ paused }: { paused: boolean }) {
   const reduced = useReducedMotion();
   const [index, setIndex] = useState(0);
+  const [previous, setPrevious] = useState<number | null>(null);
+  const [incomingVisible, setIncomingVisible] = useState(true);
+  const indexRef = useRef(0);
 
   useEffect(() => {
-    if (reduced) return;
-    const id = window.setInterval(() => {
-      setIndex((current) => (current + 1) % heroSlides.length);
-    }, 4200);
-    return () => window.clearInterval(id);
-  }, [reduced]);
+    indexRef.current = index;
+  }, [index]);
+
+  useEffect(() => {
+    if (previous === null || !incomingVisible) return;
+    const id = window.setTimeout(() => setPrevious(null), 1000);
+    return () => window.clearTimeout(id);
+  }, [previous, incomingVisible]);
+
+  useEffect(() => {
+    if (reduced || paused) return;
+
+    let id: number | undefined;
+
+    const play = () => {
+      id = window.setInterval(() => {
+        const current = indexRef.current;
+        setPrevious(current);
+        setIncomingVisible(false);
+        setIndex((current + 1) % heroSlides.length);
+      }, 4200);
+    };
+
+    const stop = () => {
+      if (id !== undefined) {
+        window.clearInterval(id);
+        id = undefined;
+      }
+    };
+
+    const onVisibility = () => {
+      stop();
+      if (!document.hidden) play();
+    };
+
+    if (!document.hidden) play();
+    document.addEventListener("visibilitychange", onVisibility);
+
+    return () => {
+      stop();
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, [reduced, paused]);
+
+  const mounted =
+    previous === null || previous === index ? [index] : [previous, index];
 
   return (
     <>
-      {heroSlides.map((slide, i) => (
-        <Image
-          key={slide.src}
-          src={slide.src}
-          alt={slide.alt}
-          fill
-          priority={i === 0}
-          sizes="(max-width:1024px) 100vw, 50vw"
-          className={`object-cover object-center transition-opacity duration-1000 ease-out ${
-            i === index ? "opacity-100" : "opacity-0"
-          }`}
-        />
-      ))}
-      <div className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 gap-2 lg:flex" aria-hidden>
+      {mounted.map((i) => {
+        const slide = heroSlides[i];
+        const visible =
+          (i === index && incomingVisible) || (i === previous && !incomingVisible);
+
+        return (
+          <Image
+            key={slide.src}
+            src={slide.src}
+            alt={slide.alt}
+            fill
+            preload={i === 0}
+            sizes="(max-width:1024px) 100vw, 55vw"
+            onLoad={() => {
+              if (i === index) setIncomingVisible(true);
+            }}
+            onError={() => {
+              if (i === index) setIncomingVisible(true);
+            }}
+            className={`object-cover object-center transition-opacity duration-1000 ease-out ${
+              visible ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        );
+      })}
+      <div className="absolute bottom-6 right-8 z-10 hidden gap-2 lg:flex" aria-hidden>
         {heroSlides.map((slide, i) => (
           <span
             key={slide.src}
@@ -57,6 +106,7 @@ function HeroSlideshow() {
 
 export function HomeHero() {
   const reduced = useReducedMotion();
+  const [paused, setPaused] = useState(false);
   const sceneRef = useRef<HTMLElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
@@ -127,39 +177,14 @@ export function HomeHero() {
 
   return (
     <section ref={sceneRef} className="hero-scene relative h-[100dvh] overflow-hidden bg-[var(--paper)]">
-      <div className="flex h-full items-center">
-        <div className="container-page grid w-full items-center gap-10 px-2 pt-24 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
-          <div>
-            <p className="eyebrow">Hakkımızda</p>
-            <h2 className="mt-3 font-[family-name:var(--font-display)] text-4xl font-extrabold leading-[0.92] md:text-5xl lg:text-6xl">
-              {aboutMore.title}
-            </h2>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--muted)] md:text-lg">{aboutIntro}</p>
-            <Link href="/hakkimizda" className="btn btn-plum mt-8">
-              Okulu tanı
-            </Link>
-          </div>
-          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[22px] sm:aspect-[5/4] lg:aspect-[4/5]">
-              <Image
-                src={photos.play}
-                alt="Lider Çocuklar oyun alanı"
-                fill
-                sizes="(max-width:1024px) 100vw, 40vw"
-                className="object-cover"
-              />
-            </div>
-            <p className="absolute bottom-4 left-4 right-4 rounded-[16px] bg-[var(--star)] px-5 py-4 font-[family-name:var(--font-display)] text-lg font-extrabold leading-tight text-[var(--ink)] md:text-xl">
-              Meslek köşeleri, oyun ve atölye — bir günün içindeki küçük şehir.
-            </p>
-          </div>
+      <div ref={overlayRef} className="hero-overlay absolute inset-0 z-10 overflow-hidden">
+        <div ref={rightRef} className="hero-photo-bleed absolute">
+          <HeroSlideshow paused={paused} />
         </div>
-      </div>
 
-      <div ref={overlayRef} className="hero-overlay absolute inset-0 z-10 overflow-hidden lg:flex">
         <div
           ref={leftRef}
-          className="relative z-10 flex h-full w-full flex-col justify-end bg-gradient-to-t from-[var(--grape)] via-[var(--grape)]/80 to-[var(--grape)]/25 px-6 pb-12 pt-32 text-[var(--foam)] sm:px-8 md:pb-16 lg:w-[52%] lg:justify-center lg:bg-[var(--grape)] lg:bg-none lg:pl-[max(2rem,calc((100vw-74rem)/2))] lg:pr-12"
+          className="relative z-10 flex h-full w-full flex-col justify-end bg-gradient-to-t from-[var(--grape)] via-[var(--grape)]/80 to-[var(--grape)]/25 px-6 pb-12 pt-32 text-[var(--foam)] sm:px-8 md:pb-16 lg:w-[62%] lg:justify-center lg:bg-gradient-to-r lg:from-[var(--grape)] lg:from-55% lg:via-[var(--grape)]/88 lg:via-78% lg:to-transparent lg:pl-[max(2rem,calc((100vw-74rem)/2))] lg:pr-16"
         >
           <motion.div
             className="mt-2"
@@ -167,7 +192,7 @@ export function HomeHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
           >
-            <Logo className="h-28 w-28 sm:h-36 sm:w-36 lg:h-44 lg:w-44" priority />
+            <Logo className="h-28 w-28 sm:h-36 sm:w-36 lg:h-44 lg:w-44" />
             <h1 className="mt-6 font-[family-name:var(--font-display)] text-[clamp(2.8rem,6.6vw,5.6rem)] font-extrabold leading-[0.88] tracking-[-0.05em]">
               {site.shortName}
             </h1>
@@ -205,8 +230,44 @@ export function HomeHero() {
           </p>
         </div>
 
-        <div ref={rightRef} className="absolute inset-0 -z-10 lg:relative lg:z-0 lg:h-full lg:w-[48%] lg:shrink-0">
-          <HeroSlideshow />
+        {reduced ? null : (
+          <button
+            type="button"
+            className="absolute right-4 top-24 z-20 rounded-full bg-[var(--star)] px-3 py-1.5 text-xs font-semibold text-[var(--ink)]"
+            aria-pressed={paused}
+            onClick={() => setPaused((current) => !current)}
+          >
+            {paused ? "Oynat" : "Duraklat"}
+          </button>
+        )}
+      </div>
+
+      <div className="flex h-full items-center">
+        <div className="container-page grid w-full items-center gap-10 px-2 pt-24 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+          <div>
+            <p className="eyebrow">Hakkımızda</p>
+            <h2 className="mt-3 font-[family-name:var(--font-display)] text-4xl font-extrabold leading-[0.92] md:text-5xl lg:text-6xl">
+              {aboutMore.title}
+            </h2>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--muted)] md:text-lg">{aboutIntro}</p>
+            <Link href="/hakkimizda" className="btn btn-plum mt-8">
+              Okulu tanı
+            </Link>
+          </div>
+          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[22px] sm:aspect-[5/4] lg:aspect-[4/5]">
+              <Image
+                src={photos.play}
+                alt="Lider Çocuklar oyun alanı"
+                fill
+                sizes="(max-width:1024px) 100vw, 40vw"
+                className="object-cover"
+              />
+            </div>
+            <p className="absolute bottom-4 left-4 right-4 rounded-[16px] bg-[var(--star)] px-5 py-4 font-[family-name:var(--font-display)] text-lg font-extrabold leading-tight text-[var(--ink)] md:text-xl">
+              Meslek Köşeleri, Oyun Ve Atölye — Bir Günün İçindeki Küçük Şehir.
+            </p>
+          </div>
         </div>
       </div>
     </section>
