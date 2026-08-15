@@ -18,10 +18,6 @@ export function JsonLd() {
       addressRegion: site.address.city,
       addressCountry: "TR",
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      addressCountry: "TR",
-    },
     sameAs: [site.instagramUrl],
     openingHoursSpecification: [
       {
@@ -40,7 +36,9 @@ export function JsonLd() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(data).replace(/</g, "\\u003c"),
+      }}
     />
   );
 }

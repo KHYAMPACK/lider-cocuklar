@@ -1,34 +1,74 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useEffect, useSyncExternalStore, type ReactNode } from "react";
 import { Logo } from "@/components/Logo";
 import { site } from "@/lib/site";
 
 const KEY = "lc-intro";
 
-export function IntroLoader() {
+const listeners = new Set<() => void>();
+let dismissed = false;
+
+function subscribe(onStoreChange: () => void) {
+  listeners.add(onStoreChange);
+  return () => {
+    listeners.delete(onStoreChange);
+  };
+}
+
+function getSnapshot() {
+  if (dismissed) return true;
+  try {
+    return sessionStorage.getItem(KEY) !== null;
+  } catch {
+    return true;
+  }
+}
+
+function getServerSnapshot() {
+  return true;
+}
+
+function persistIntro() {
+  dismissed = true;
+  try {
+    sessionStorage.setItem(KEY, "1");
+  } catch {
+    /* ignore */
+  }
+  listeners.forEach((listener) => listener());
+}
+
+function useIntroVisible() {
   const reduced = useReducedMotion();
-  const [visible, setVisible] = useState(false);
+  const seen = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  return !reduced && !seen;
+}
+
+export function IntroInert({ children }: { children: ReactNode }) {
+  const visible = useIntroVisible();
+
+  return (
+    <div className="flex min-h-0 flex-1 flex-col" inert={visible || undefined}>
+      {children}
+    </div>
+  );
+}
+
+export function IntroLoader() {
+  const visible = useIntroVisible();
 
   useEffect(() => {
-    if (reduced) return;
-    try {
-      if (sessionStorage.getItem(KEY)) return;
-    } catch {
-      return;
-    }
-    setVisible(true);
-    const t = window.setTimeout(() => {
-      setVisible(false);
-      try {
-        sessionStorage.setItem(KEY, "1");
-      } catch {
-        /* ignore */
-      }
-    }, 1100);
-    return () => window.clearTimeout(t);
-  }, [reduced]);
+    if (!visible) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const t = window.setTimeout(persistIntro, 1100);
+    return () => {
+      window.clearTimeout(t);
+      document.body.style.overflow = previous;
+    };
+  }, [visible]);
 
   return (
     <AnimatePresence>
@@ -37,7 +77,7 @@ export function IntroLoader() {
           className="fixed inset-0 z-[90] flex items-center justify-center bg-[var(--grape)]"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.45, ease: [0.21, 0.47, 0.32, 0.98] } }}
-          aria-hidden
+          role="status"
         >
           <motion.div
             className="flex flex-col items-center gap-3 text-[var(--foam)]"

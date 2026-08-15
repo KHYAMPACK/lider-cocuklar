@@ -3,16 +3,27 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useMotionValueEvent, useScroll } from "motion/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/Logo";
 import { navLinks, site } from "@/lib/site";
+
+const FOCUSABLE = "a[href], button:not([disabled]), [tabindex]:not([tabindex='-1'])";
+
+function visibleFocusable(root: HTMLElement) {
+  return Array.from(root.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
+    (el) => el.getClientRects().length > 0,
+  );
+}
 
 export function Header() {
   const pathname = usePathname();
   const { scrollY } = useScroll();
+  const headerRef = useRef<HTMLElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [focusWithin, setFocusWithin] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (y) => {
     const prev = scrollY.getPrevious() ?? 0;
@@ -21,22 +32,72 @@ export function Header() {
       setHidden(false);
       return;
     }
+    const header = headerRef.current;
+    if (header?.contains(document.activeElement)) {
+      setHidden(false);
+      return;
+    }
     setHidden(y > 90 && y > prev);
   });
 
+  useEffect(() => {
+    if (!open) return;
+
+    const header = headerRef.current;
+    const toggle = toggleRef.current;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setOpen(false);
+        return;
+      }
+      if (event.key !== "Tab" || !header) return;
+      const focusable = visibleFocusable(header);
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
+      toggle?.focus();
+    };
+  }, [open]);
+
   const overlay = !scrolled && !open;
+  const offScreen = hidden && !open && !focusWithin;
   const barClass = overlay
     ? "bg-transparent text-white"
     : "bg-[var(--foam)]/88 text-[var(--ink)] shadow-[0_1px_0_rgba(22,14,34,0.08)] backdrop-blur-md";
 
   return (
     <header
-      className={`fixed top-0 z-50 w-full transition-transform duration-300 ${hidden ? "-translate-y-full" : "translate-y-0"}`}
+      ref={headerRef}
+      inert={offScreen || undefined}
+      className={`fixed top-0 z-50 w-full transition-transform duration-300 ${offScreen ? "-translate-y-full" : "translate-y-0"}`}
+      onFocusCapture={() => setFocusWithin(true)}
+      onBlurCapture={(event) => {
+        const next = event.relatedTarget;
+        if (next instanceof Node && event.currentTarget.contains(next)) return;
+        setFocusWithin(false);
+      }}
     >
       <div className={`transition-colors duration-300 ${barClass}`}>
         <div className="mx-auto flex max-w-[74rem] items-center justify-between gap-4 px-4 py-3 md:px-6">
           <Link href="/" className="flex min-w-0 items-center gap-2 sm:gap-3" onClick={() => setOpen(false)}>
-            <Logo className="h-10 w-10 shrink-0 sm:h-12 sm:w-12" priority />
+            <Logo className="h-10 w-10 shrink-0 sm:h-12 sm:w-12" />
             <span className="min-w-0 leading-tight">
               <span className="block truncate font-[family-name:var(--font-display)] text-base font-extrabold sm:text-lg">
                 {site.shortName}
@@ -75,6 +136,7 @@ export function Header() {
           </Link>
 
           <button
+            ref={toggleRef}
             type="button"
             className={`inline-flex h-11 w-11 items-center justify-center rounded-[14px] border lg:hidden ${
               overlay ? "border-white/30 bg-white/10" : "border-[var(--line)] bg-[var(--foam)]"

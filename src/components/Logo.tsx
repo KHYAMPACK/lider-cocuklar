@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type LogoProps = {
   className?: string;
   priority?: boolean;
@@ -5,17 +7,15 @@ type LogoProps = {
 
 export function Logo({ className = "h-12 w-12", priority = false }: LogoProps) {
   return (
-    // Plain <img> + cache-bust so PNG transparency is preserved and not served from an old opaque cache.
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/logo.png?v=3"
+    <Image
+      src="/logo.png"
       alt="Lider Çocuklar Anaokulu"
-      width={2000}
-      height={2000}
+      width={512}
+      height={512}
+      sizes="(max-width: 640px) 80px, 176px"
       className={`bg-transparent object-contain ${className}`}
       style={{ backgroundColor: "transparent", backgroundImage: "none" }}
-      decoding="async"
-      {...(priority ? { fetchPriority: "high" as const } : {})}
+      preload={priority}
     />
   );
 }

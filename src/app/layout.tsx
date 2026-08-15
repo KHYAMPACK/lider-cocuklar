@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque, Figtree, IBM_Plex_Mono } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { IntroLoader } from "@/components/IntroLoader";
+import { IntroInert, IntroLoader } from "@/components/IntroLoader";
 import { JsonLd } from "@/components/JsonLd";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { homeTitle, sharedOpenGraph, sharedTwitter } from "@/lib/seo";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -27,7 +28,7 @@ const mono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | Denizli Merkezefendi Anaokulu`,
+    default: homeTitle,
     template: `%s | ${site.shortName}`,
   },
   description: site.description,
@@ -43,21 +44,8 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  openGraph: {
-    type: "website",
-    locale: "tr_TR",
-    url: site.url,
-    siteName: site.name,
-    title: site.name,
-    description: site.description,
-    images: [{ url: "/logo.png", width: 400, height: 400, alt: site.shortName }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: site.name,
-    description: site.description,
-    images: ["/logo.png"],
-  },
+  openGraph: sharedOpenGraph,
+  twitter: sharedTwitter,
   robots: {
     index: true,
     follow: true,
@@ -75,10 +63,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <JsonLd />
         <IntroLoader />
         <div className="site-grain" aria-hidden />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <ScrollToTop />
+        <IntroInert>
+          <a href="#icerik" className="skip-link">
+            İçeriğe atla
+          </a>
+          <Header />
+          <main id="icerik" tabIndex={-1} className="flex-1">
+            {children}
+          </main>
+          <Footer />
+          <ScrollToTop />
+        </IntroInert>
       </body>
     </html>
   );

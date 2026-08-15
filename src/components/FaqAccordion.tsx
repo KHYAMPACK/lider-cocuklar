@@ -1,15 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { faqs } from "@/lib/site";
 
 export function FaqAccordion() {
   const [open, setOpen] = useState(0);
+  const baseId = useId();
 
   return (
     <div className="space-y-2">
       {faqs.map((item, i) => {
         const isOpen = open === i;
+        const panelId = `${baseId}-panel-${i}`;
         return (
           <div key={item.q} className="overflow-hidden rounded-[16px] bg-[var(--foam)]">
             <button
@@ -19,9 +21,11 @@ export function FaqAccordion() {
                 isOpen ? "bg-[var(--grape)] text-white" : "text-[var(--ink)] hover:bg-[var(--paper)]"
               }`}
               aria-expanded={isOpen}
+              aria-controls={panelId}
             >
               <span>{item.q}</span>
               <span
+                aria-hidden="true"
                 className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${
                   isOpen ? "bg-[var(--star)] text-[var(--ink)]" : "bg-[var(--paper)] text-[var(--ink)]"
                 }`}
@@ -31,9 +35,14 @@ export function FaqAccordion() {
                 </svg>
               </span>
             </button>
-            {isOpen ? (
-              <div className="px-4 pb-4 text-sm leading-relaxed text-[var(--muted)]">{item.a}</div>
-            ) : null}
+            <div
+              id={panelId}
+              role="region"
+              hidden={!isOpen}
+              className="px-4 pb-4 text-sm leading-relaxed text-[var(--muted)]"
+            >
+              {item.a}
+            </div>
           </div>
         );
       })}
