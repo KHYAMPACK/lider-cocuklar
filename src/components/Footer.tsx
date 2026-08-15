@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { navLinks, site, whatsappLink } from "@/lib/site";
 
@@ -71,13 +72,34 @@ export function Footer() {
       </div>
 
       <div className="bg-[var(--star)]">
-        <div className="mx-auto flex max-w-[74rem] flex-col items-start justify-between gap-2 px-4 py-3 text-sm font-semibold text-[var(--ink)] md:flex-row md:items-center md:px-6">
-          <p>
-            © {new Date().getFullYear()} {site.name}
-          </p>
-          <p className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.16em]">
-            {site.ageRange} · M.E.B · ISO 9001
-          </p>
+        <div className="mx-auto flex max-w-[74rem] flex-col items-start justify-between gap-3 px-4 py-3 text-sm font-semibold text-[var(--ink)] md:flex-row md:items-center md:px-6">
+          <div>
+            <p>
+              © {new Date().getFullYear()} {site.name}
+            </p>
+            <p className="mt-1 font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-[0.16em]">
+              {site.ageRange} · M.E.B · ISO 9001
+            </p>
+          </div>
+          <a
+            href="https://ekizyazilim.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 rounded-[10px] transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--grape)]"
+          >
+            <span className="font-[family-name:var(--font-mono)] text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--ink)]">
+              Powered by
+            </span>
+            <span className="inline-flex overflow-hidden rounded-[10px] bg-[var(--ink)]">
+              <Image
+                src="/ekiz-yazilim-watermark.png"
+                alt="Ekiz Yazılım"
+                width={2000}
+                height={2000}
+                className="h-12 w-auto md:h-14"
+              />
+            </span>
+          </a>
         </div>
       </div>
     </footer>

@@ -50,10 +50,6 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  icons: {
-    icon: [{ url: "/logo.png", type: "image/png" }],
-    apple: [{ url: "/logo.png" }],
-  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
