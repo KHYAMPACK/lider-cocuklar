@@ -60,7 +60,7 @@ export function ActivityCorridor() {
             Atölye koridoru
           </p>
           <h2 className="mt-3 max-w-3xl font-[family-name:var(--font-display)] text-4xl font-extrabold leading-[0.92] md:text-5xl lg:text-6xl">
-            Günün Programı, Koridorda Yürüyün.
+            Koridorda Yürüyün...
           </h2>
           <p className="mt-4 max-w-xl text-base text-white/70 md:text-lg">
             P4C, Orff, satranç, drama, İngilizce, terzilik, maker, jimnastik, yoga ve mindfulness.

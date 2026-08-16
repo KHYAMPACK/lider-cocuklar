@@ -80,10 +80,12 @@ export const whyCards = [
 ] as const;
 
 export const aboutChecks = [
-  "M.E.B standartları ve İSO9001 uyumu",
+  "MEB standartları ve İSO9001 uyumu",
   "3–6 yaşa özel donanımlı ortam",
   "Meslek köşeleriyle yaşam becerileri",
-  "Enerjiyi olumlu atan oyun alanları",
+  "Enerjiyi olumlu yönlendiren oyun alanları",
+  "Uzman branş öğretmenleriyle zengin gün",
+  "Hayata uyumlu günlük programlar",
 ] as const;
 
 export const gardenPlay = {
@@ -99,7 +101,7 @@ export const gardenPlay = {
 export const dayRhythm = {
   eyebrow: "Günlük ritim",
   title: "Bir Günün Ritmi",
-  intro: "Çalışan ebeveynler için erken açılış; gün boyu oyun, öğün ve esnek çıkış.",
+  intro: "Tempomuzu hiç bozmadan sizler için erken açılış; gün boyu oyun, öğün ve esnek çıkış.",
   steps: [
     { time: "07:30", title: "Kapılar Açılır", detail: "Tam gün karşılama", tone: "grape" },
     { time: "09:00", title: "Gün Başlar", detail: "Oyun ve keşif", tone: "pool" },
@@ -113,7 +115,7 @@ export const dayRhythm = {
 export const ageGroups = {
   eyebrow: "Sınıflar",
   title: "Yaş Grupları",
-  intro: "Küçük gruplar — her yaşa kendi temposu.",
+  intro: "Her yaşa kendi temposu.",
   bands: [
     { range: "3 yaş", text: "İlk ayrılık, güven ve oyun. Küçük adımlarla okula alışma." },
     { range: "4–5 yaş", text: "Keşif, arkadaşlık ve atölye. Merakın günlük işe dönüştüğü yıllar." },
