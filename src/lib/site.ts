@@ -40,6 +40,9 @@ export const navLinks = [
 export const aboutIntro =
   "Çocuklarımızın bütünlüğünü gözeterek; zihinsel, bedensel ve psikolojik gelişimlerini destekleyen eğitim vermeyi, demokratik bir ortamda eğitim programımız ile çocuklarımızın kişilik özelliklerini, bağımsızlık, yaratıcılık, sorumluluk ve liderlik becerilerini güçlendirmeyi amaçlıyoruz.";
 
+export const aboutIntroShort =
+  "Zihinsel, bedensel ve psikolojik gelişimi destekleyen; liderlik ve yaratıcılığı güçlendiren bir eğitim.";
+
 export const aboutMore = {
   title: "Bir Anaokulundan Daha Fazlası...",
   paragraphs: [

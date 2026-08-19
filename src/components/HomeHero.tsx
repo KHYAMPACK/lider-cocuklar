@@ -6,7 +6,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/Logo";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { aboutIntro, aboutMore, heroSlides, photos, site, whatsappLink } from "@/lib/site";
+import { aboutIntro, aboutIntroShort, aboutMore, heroSlides, photos, site, whatsappLink } from "@/lib/site";
 
 function HeroSlideshow({ paused }: { paused: boolean }) {
   const reduced = useReducedMotion();
@@ -242,20 +242,25 @@ export function HomeHero() {
         )}
       </div>
 
-      <div className="flex h-full items-center">
-        <div className="container-page grid w-full items-center gap-10 px-2 pt-24 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+      <div className="flex h-full items-start lg:items-center">
+        <div className="container-page grid w-full items-start gap-6 px-2 pt-24 pb-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-16 lg:pb-0">
           <div>
             <p className="eyebrow">Hakkımızda</p>
             <h2 className="mt-3 font-[family-name:var(--font-display)] text-4xl font-extrabold leading-[0.92] md:text-5xl lg:text-6xl">
               {aboutMore.title}
             </h2>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--muted)] md:text-lg">{aboutIntro}</p>
-            <Link href="/hakkimizda" className="btn btn-plum mt-8">
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--muted)] lg:hidden">
+              {aboutIntroShort}
+            </p>
+            <p className="mt-6 hidden max-w-xl text-base leading-relaxed text-[var(--muted)] lg:block lg:text-lg">
+              {aboutIntro}
+            </p>
+            <Link href="/hakkimizda" className="btn btn-plum mt-6 lg:mt-8">
               Okulu tanı
             </Link>
           </div>
           <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[22px] sm:aspect-[5/4] lg:aspect-[4/5]">
+            <div className="relative h-[28vh] overflow-hidden rounded-[22px] sm:h-[36vh] lg:aspect-[4/5] lg:h-auto">
               <Image
                 src={photos.play}
                 alt="Lider Çocuklar oyun alanı"
