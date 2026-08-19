@@ -115,15 +115,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className={h2Class}>10. Fotoğraflar</h2>
-            <p className="mt-3">
-              Sitedeki okul hayatı fotoğrafları okula aittir ve aile izniyle kullanılır. Tanınabilir bir görüntünün
-              kaldırılmasını istiyorsanız e-posta ile yazın; talebinizi inceleriz.
-            </p>
-          </section>
-
-          <section>
-            <h2 className={h2Class}>11. İletişim</h2>
+            <h2 className={h2Class}>10. İletişim</h2>
             <p className="mt-3">
               Gizlilik ve kişisel veri talepleriniz için{" "}
               <a href={`mailto:${site.email}`} className={linkClass}>

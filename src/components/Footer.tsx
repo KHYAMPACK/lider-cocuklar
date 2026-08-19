@@ -55,7 +55,11 @@ export function Footer() {
             <p className="font-[family-name:var(--font-mono)] text-[0.7rem] uppercase tracking-[0.2em] text-[var(--star)]">
               Ziyaret
             </p>
-            <p className="mt-4 text-sm leading-relaxed text-white/85">{site.address.full}</p>
+            <p className="mt-4 text-sm leading-relaxed text-white/85">
+              <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--star)]">
+                {site.address.full}
+              </a>
+            </p>
             <p className="mt-3 font-[family-name:var(--font-mono)] text-xs uppercase tracking-[0.14em] text-white/55">
               {site.hours[0].days} · {site.classHours}
             </p>

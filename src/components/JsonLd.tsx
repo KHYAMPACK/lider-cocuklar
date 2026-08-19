@@ -18,7 +18,7 @@ export function JsonLd() {
       addressRegion: site.address.city,
       addressCountry: "TR",
     },
-    sameAs: [site.instagramUrl],
+    sameAs: [site.instagramUrl, site.mapsUrl],
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",

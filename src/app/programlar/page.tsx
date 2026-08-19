@@ -32,18 +32,16 @@ export default function ServicesPage() {
 
       <div className="container-page py-20 md:py-28">
         <h2 className="font-[family-name:var(--font-display)] text-3xl font-extrabold md:text-4xl">Okuldaki Alanlar</h2>
-        <div className="mt-8 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+        <ul className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {allServices.map((service) => (
-            <article key={service.slug} className="overflow-hidden rounded-[20px] bg-[var(--foam)]">
-              <div className="relative aspect-square">
-                <Image src={service.image} alt={service.title} fill sizes="(max-width:640px) 45vw, 240px" className="object-cover" />
-              </div>
-              <h3 className="px-3 py-3 font-[family-name:var(--font-display)] text-sm font-extrabold text-[var(--grape)] sm:px-4 sm:text-lg">
-                {service.title}
-              </h3>
-            </article>
+            <li
+              key={service.slug}
+              className="rounded-[20px] bg-[var(--foam)] px-5 py-4 font-[family-name:var(--font-display)] text-lg font-extrabold text-[var(--grape)]"
+            >
+              {service.title}
+            </li>
           ))}
-        </div>
+        </ul>
 
         <h2 className="mt-16 font-[family-name:var(--font-display)] text-3xl font-extrabold md:mt-20 md:text-4xl">
           Yeni Atölyeler

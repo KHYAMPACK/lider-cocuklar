@@ -2,14 +2,16 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ActivityCorridor } from "@/components/ActivityCorridor";
+import { ExperiencedTeam } from "@/components/ExperiencedTeam";
 import { FaqAccordion } from "@/components/FaqAccordion";
+import { GardenPlay } from "@/components/GardenPlay";
 import { HomeHero } from "@/components/HomeHero";
+import { SchoolFrames } from "@/components/SchoolFrames";
 import {
   AgeGroups,
   BranchTeachers,
   DayRhythm,
   EnrollmentSteps,
-  GardenPlay,
   Nutrition,
 } from "@/components/LifeAtSchool";
 import { ScrollReveal } from "@/components/ScrollReveal";
@@ -17,7 +19,6 @@ import { WhyIcon } from "@/components/WhyIcon";
 import { homeTitle, pageMetadata } from "@/lib/seo";
 import {
   aboutChecks,
-  featuredServices,
   photos,
   site,
   whyCards,
@@ -33,6 +34,10 @@ export default function HomePage() {
   return (
     <>
       <HomeHero />
+
+      <ExperiencedTeam />
+
+      <SchoolFrames />
 
       <ActivityCorridor />
 
@@ -105,43 +110,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 md:py-32">
-        <div className="container-page">
-          <ScrollReveal className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-            <div>
-              <p className="eyebrow">Atölyeler</p>
-              <h2 className="mt-3 font-[family-name:var(--font-display)] text-4xl font-extrabold leading-[0.92] md:text-5xl">
-                Hizmetlerimiz
-              </h2>
-            </div>
-            <Link href="/programlar" className="btn btn-plum">
-              Tümünü göster
-            </Link>
-          </ScrollReveal>
-
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {featuredServices.map((service, i) => (
-              <ScrollReveal key={service.slug} delay={i * 0.08}>
-                <article className="flex h-full flex-col overflow-hidden rounded-[22px] bg-[var(--foam)]">
-                  <div className="relative aspect-[5/4]">
-                    <Image src={service.image} alt={service.title} fill sizes="(max-width:768px) 100vw, 33vw" className="object-cover" />
-                  </div>
-                  <div className="flex flex-1 flex-col p-6">
-                    <h3 className="font-[family-name:var(--font-display)] text-2xl font-extrabold text-[var(--grape)]">
-                      {service.title}
-                    </h3>
-                    <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--muted)]">{service.text}</p>
-                    <Link href="/programlar" className="mt-5 text-sm font-bold text-[var(--ink)] hover:text-[var(--blush)]">
-                      Devamını oku
-                    </Link>
-                  </div>
-                </article>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <BranchTeachers />
 
       <DayRhythm />
@@ -206,7 +174,7 @@ export default function HomePage() {
               rel="noopener noreferrer"
               className="text-sm font-bold text-[var(--grape)] hover:text-[var(--blush)]"
             >
-              Google Haritalar’da aç
+              Google’da aç
             </a>
           </div>
         </div>

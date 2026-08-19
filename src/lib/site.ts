@@ -16,10 +16,9 @@ export const site = {
   },
   instagram: "denizli_lidercocuklar_anaokulu",
   instagramUrl: "https://www.instagram.com/denizli_lidercocuklar_anaokulu/",
-  mapsUrl:
-    "https://www.google.com/maps/search/?api=1&query=Yenişehir+Mahallesi+55.+Sokak+No:4+Merkezefendi+Denizli",
+  mapsUrl: "https://share.google/23r7LxRcKglNURNVv",
   mapsEmbedUrl:
-    "https://maps.google.com/maps?q=Yenişehir%20Mahallesi%2055.%20Sokak%20No:4%20Merkezefendi%20Denizli&z=16&output=embed",
+    "https://maps.google.com/maps?q=%C3%96zel%20Denizli%20Lider%20%C3%87ocuklar%20Anaokulu&z=16&output=embed",
   classHours: "07:30 – 18:30",
   ageRange: "3–6 yaş",
   hours: [
@@ -48,6 +47,32 @@ export const aboutMore = {
   paragraphs: [
     "Okulumuz M.E.B standartlarında ve İSO9001 normlarına uygun yapılmış olup, özel tasarımlı kız ve erkek ayrı bölmeli çocuk tuvaletleri, sadece okul öncesi çocuklara yönelik (3-6 yaş), son teknoloji ile donatılmıştır.",
     "Çocuklarımızın gerçek hayatta gördükleri farklı meslek gruplarına yönelik oluşturulan alanlarda; kaba motor ve sosyal-duygusal gelişimleri ile günlük yaşam becerilerini geliştirebilecekleri bir yaşam alanı olarak düzenlenmiştir. Aynı zamanda eğlenerek, enerjilerini olumlu yönde atabilecekleri oyun alanımız bulunmaktadır.",
+  ],
+} as const;
+
+export const experiencedTeam = {
+  eyebrow: "Ekibimiz",
+  title: "Güçlü Bir Eğitim, Güçlü Bir Ekip İle Başlar",
+  accent: "Güçlü Bir Ekip",
+  intro:
+    "Öğretmenlerimizin büyük bir bölümü uzun yıllardır kurumumuzun eğitim yolculuğuna eşlik ediyor. Bizim için bu süreklilik yalnızca çalışma yılı değil; ortak bir eğitim anlayışının, güçlü ekip kültürünün ve kuruma duyulan aidiyetin göstergesidir.",
+  quote: "Süreklilik yalnızca çalışma yılı değil.",
+  pillars: [
+    {
+      title: "Ortak Eğitim Anlayışı",
+      text: "Sınıflar değişse de dilimiz aynı kalır; çocuk aynı yaklaşımla büyür.",
+      tone: "grape",
+    },
+    {
+      title: "Güçlü Ekip Kültürü",
+      text: "Deneyim paylaşılır, çocuklar yıllar içinde tanınır; kadro birlikte yürür.",
+      tone: "blush",
+    },
+    {
+      title: "Kuruma Aidiyet",
+      text: "Uzun yıllar yalnızca kıdem değil; burayı ev edinmenin göstergesi.",
+      tone: "gold",
+    },
   ],
 } as const;
 
@@ -121,8 +146,8 @@ export const ageGroups = {
   intro: "Her yaşa kendi temposu.",
   bands: [
     { range: "3 yaş", text: "İlk ayrılık, güven ve oyun. Küçük adımlarla okula alışma." },
-    { range: "4–5 yaş", text: "Keşif, arkadaşlık ve atölye. Merakın günlük işe dönüştüğü yıllar." },
-    { range: "5–6 yaş", text: "Okula hazırlık, sorumluluk ve liderlik. Bir sonraki basamağa yumuşak geçiş." },
+    { range: "4 yaş", text: "Keşif, arkadaşlık ve atölye. Merakın günlük işe dönüştüğü yıllar." },
+    { range: "5 yaş", text: "Okula hazırlık, sorumluluk ve liderlik. Bir sonraki basamağa yumuşak geçiş." },
   ],
 } as const;
 
@@ -355,8 +380,166 @@ export const photos = {
   dining: "/images/dining-room.png",
   play: "/images/play-area.png",
   classroom: "/images/fairy-classroom.png",
-  garden: "/images/garden.jpg",
+  garden: "/bahce/bahce-genis-alan.jpg",
 } as const;
+
+export const gardenPhotos = [
+  {
+    src: "/bahce/bahce-genis-alan.jpg",
+    alt: "Temsili görsel: Lider Çocuklar bahçesinde açık alanda oyun",
+    caption: "Açık Oyun Alanı",
+  },
+  {
+    src: "/bahce/bahce-bayrak.jpg",
+    alt: "Temsili görsel: bahçede oyun ve açık hava",
+    caption: "Bahçe",
+  },
+  {
+    src: "/bahce/bahce-golgelik.jpg",
+    alt: "Temsili görsel: gölgelikli bahçede tırmanma ve oyun",
+    caption: "Gölgelik",
+  },
+  {
+    src: "/bahce/bahce-dinlenme.jpg",
+    alt: "Temsili görsel: bahçede dinlenme ve etkinlik köşesi",
+    caption: "Dinlenme Köşesi",
+  },
+  {
+    src: "/bahce/bahce-kaydirak.jpg",
+    alt: "Temsili görsel: bahçede kaydırak ve oyun evi",
+    caption: "Kaydırak",
+  },
+] as const;
+
+export const schoolGallery = [
+  {
+    src: "/okul-resimleri/74b84b37-6f3a-47bf-8710-5f0f93a20613.JPG",
+    alt: "Pembe masal sınıfı, kale duvar resmi ve çalışma masaları",
+    caption: "Masal Sınıfı",
+  },
+  {
+    src: "/okul-resimleri/f09fdd60-c0e0-4d2f-9719-a9b7f2bb99bb.JPG",
+    alt: "Renkli sandalyeli yemek salonu ve mutfak köşesi",
+    caption: "Yemek Salonu",
+  },
+  {
+    src: "/okul-resimleri/8faa363e-c608-4951-aeb8-5443cf84b211.JPG",
+    alt: "Renkli minderli hareket ve oyun salonu",
+    caption: "Hareket Salonu",
+  },
+  {
+    src: "/okul-resimleri/6798f421-4760-4e37-aa70-4e844ea9ca17.JPG",
+    alt: "Yeşil vurgulu sınıf, kitaplık ve toplanma halısı",
+    caption: "Yeşil Sınıf",
+  },
+  {
+    src: "/okul-resimleri/35a0c34b-c7b3-4665-b696-8f3516b1b629.JPG",
+    alt: "Palet masalı sanat atölyesi",
+    caption: "Sanat Atölyesi",
+  },
+  {
+    src: "/okul-resimleri/378e6cc4-821e-4b0b-b966-807bca90515d.JPG",
+    alt: "Pembe çadır ve kitaplıkla okuma köşesi",
+    caption: "Okuma Köşesi",
+  },
+  {
+    src: "/okul-resimleri/06fe6f88-1b8a-45ff-b816-19ad5a81b208.JPG",
+    alt: "Oyuncak rafları, masalar ve kitaplık",
+    caption: "Oyun Ve Kitap",
+  },
+  {
+    src: "/okul-resimleri/78b11e88-e294-4a89-86ff-ab4feffe5ab3.JPG",
+    alt: "Sarı raflı sınıf ve eğitim materyalleri",
+    caption: "Sarı Sınıf",
+  },
+  {
+    src: "/okul-resimleri/54cb6511-8094-4f96-9a0b-24da09545ece.JPG",
+    alt: "Mavi kapılı sınıfta daire halinde sandalyeler",
+    caption: "Mavi Sınıf",
+  },
+  {
+    src: "/okul-resimleri/e5f3121d-566d-4286-a9b6-e490847cbdcc.JPG",
+    alt: "Kostüm köşesi, dolaplar ve çalışma masaları",
+    caption: "Kostüm Köşesi",
+  },
+  {
+    src: "/okul-resimleri/6ad3dfb8-24ec-4be1-bc72-01aeed845a72.JPG",
+    alt: "Yeşil sınıfta çalışma masaları ve pencere",
+    caption: "Çalışma Masaları",
+  },
+  {
+    src: "/okul-resimleri/08c06d09-4ba6-450a-bb3b-256cdd20eefe.JPG",
+    alt: "Sarı panolu toplanma alanı",
+    caption: "Toplanma Alanı",
+  },
+  {
+    src: "/okul-resimleri/61ecf99b-393c-47cf-bcb1-6ce87e25a24c.JPG",
+    alt: "Mavi halı etrafında grup zamanı",
+    caption: "Grup Zamanı",
+  },
+  {
+    src: "/okul-resimleri/c8d7e7c6-9f0e-4708-83fc-c694b6e23933.JPG",
+    alt: "Renkli panolu sanat atölyesi masası",
+    caption: "Renkli Atölye",
+  },
+  {
+    src: "/okul-resimleri/d6af5e80-e16e-45da-a42c-4456aa93a110.JPG",
+    alt: "Pembe sınıfta çadır, halı ve kitaplık",
+    caption: "Pembe Sınıf",
+  },
+  {
+    src: "/okul-resimleri/e7facd9c-62f7-4644-8ca8-931b13e1c597.JPG",
+    alt: "Maske ve kostüm dolabı",
+    caption: "Drama Köşesi",
+  },
+  {
+    src: "/okul-resimleri/9231845a-0d0e-41d9-8591-c4f2a2459c61.JPG",
+    alt: "Renkli öğrenci dolapları ve oturma bankı",
+    caption: "Dolaplar",
+  },
+  {
+    src: "/okul-resimleri/157c520a-a01b-4d3a-87c6-52a96a64a981.JPG",
+    alt: "Turuncu, mor ve kırmızı halılı merdiven",
+    caption: "Merdiven",
+  },
+  {
+    src: "/okul-resimleri/b5381a52-438f-41fd-a920-8c7b37a3fa1b.JPG",
+    alt: "Çocuk boyu tuvaletler ve lavabo",
+    caption: "Çocuk Tuvaletleri",
+  },
+  {
+    src: "/okul-resimleri/4cc89bdf-f0ac-47a2-b5ba-5e5e230bb377.JPG",
+    alt: "Çocuk boyu el yıkama lavaboları",
+    caption: "El Yıkama",
+  },
+  {
+    src: "/okul-resimleri/b7e658a0-c3fc-4d2a-9fc5-e73ccbc7d847.JPG",
+    alt: "Sarı ve yeşil kapılı okul koridoru",
+    caption: "Koridor",
+  },
+  {
+    src: "/okul-resimleri/0ed4c2e1-f7c8-4b9c-8773-e0d76a50e3d6.JPG",
+    alt: "Aşçı çocuk figürlü yemekhane duvar resmi",
+    caption: "Yemekhane Duvarı",
+  },
+  {
+    src: "/okul-resimleri/3ece4da8-15cc-497f-a7fb-498726eda536.JPG",
+    alt: "Bahçede Anneler Günü masaları, renkli sandalyeler ve oyun alanı",
+    caption: "Anneler Günü Bahçesi",
+  },
+  {
+    src: "/okul-resimleri/c2d9c0bb-b071-4399-9229-48806242024e.JPG",
+    alt: "Bahçe masalarında hasır şapka ve el işi malzemeleri",
+    caption: "Bahçe Atölyesi",
+  },
+  {
+    src: "/okul-resimleri/f145e7c5-9e1c-4529-9ea6-ad1a70916799.JPG",
+    alt: "Bahçede satranç masaları ve dev satranç figürleri",
+    caption: "Açık Hava Satrancı",
+  },
+] as const;
+
+export const schoolGalleryPreview = schoolGallery.slice(0, 6);
 
 export const heroSlides = [
   { src: photos.classroom, alt: "Masal temalı pembe sınıf" },

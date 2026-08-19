@@ -47,14 +47,18 @@ export default function ContactPage() {
               <h2 className="font-[family-name:var(--font-mono)] text-[0.7rem] uppercase tracking-[0.2em] text-[var(--blush)]">
                 Adres
               </h2>
-              <p className="mt-2 text-[var(--muted)]">{site.address.full}</p>
+              <p className="mt-2 text-[var(--muted)]">
+                <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--blush)]">
+                  {site.address.full}
+                </a>
+              </p>
               <a
                 href={site.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-3 inline-block text-sm font-bold text-[var(--grape)] hover:text-[var(--blush)]"
               >
-                Haritada aç
+                Google’da aç
               </a>
               <ul className="mt-4 space-y-1 font-[family-name:var(--font-mono)] text-xs uppercase tracking-[0.12em] text-[var(--muted)]">
                 {site.hours.map((h) => (

@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { AgeGroups, GardenPlay, Nutrition } from "@/components/LifeAtSchool";
+import { ExperiencedTeam } from "@/components/ExperiencedTeam";
+import { GardenPlay } from "@/components/GardenPlay";
+import { AgeGroups, Nutrition } from "@/components/LifeAtSchool";
 import { PageIntro } from "@/components/PageIntro";
 import { pageMetadata } from "@/lib/seo";
 import { aboutIntro, aboutMore, site } from "@/lib/site";
@@ -41,13 +43,20 @@ export default function AboutPage() {
                 <p key={p.slice(0, 24)}>{p}</p>
               ))}
             </div>
-            <p className="mt-5 text-sm font-semibold text-[var(--ink)]">Adres: {site.address.full}</p>
+            <p className="mt-5 text-sm font-semibold text-[var(--ink)]">
+              Adres:{" "}
+              <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--blush)]">
+                {site.address.full}
+              </a>
+            </p>
             <Link href="/iletisim" className="btn btn-coral mt-7 w-full sm:w-auto">
               Bize Ulaşın
             </Link>
           </div>
         </div>
       </div>
+
+      <ExperiencedTeam />
 
       <GardenPlay />
       <AgeGroups />

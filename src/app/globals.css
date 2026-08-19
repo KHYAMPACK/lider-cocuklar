@@ -296,6 +296,34 @@ iframe {
   animation: floaty 5.8s ease-in-out infinite;
 }
 
+@keyframes garden-ken {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.garden-slide {
+  opacity: 0;
+  transform: scale(1.04);
+  transition:
+    opacity 1.2s ease,
+    transform 6.5s ease-out;
+  will-change: opacity, transform;
+}
+
+.garden-slide-active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+.garden-slide-active img {
+  animation: garden-ken 7s ease-out both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -303,7 +331,10 @@ iframe {
 
   .sticker,
   .btn,
-  .site-grain {
+  .site-grain,
+  .garden-slide,
+  .garden-slide-active,
+  .garden-slide-active img {
     animation: none !important;
     transition: none !important;
   }

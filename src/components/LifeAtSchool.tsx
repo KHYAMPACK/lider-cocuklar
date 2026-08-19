@@ -6,7 +6,6 @@ import {
   branchTeachers,
   dayRhythm,
   enrollment,
-  gardenPlay,
   nutrition,
   photos,
 } from "@/lib/site";
@@ -17,38 +16,6 @@ const stepTone = {
   gold: "bg-[var(--star)] text-[var(--ink)]",
   blush: "bg-[var(--blush)] text-white",
 } as const;
-
-export function GardenPlay() {
-  return (
-    <section className="py-24 md:py-32">
-      <div className="container-page grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-        <ScrollReveal>
-          <p className="eyebrow">{gardenPlay.eyebrow}</p>
-          <h2 className="mt-3 font-[family-name:var(--font-display)] text-4xl font-extrabold leading-[0.92] md:text-5xl">
-            Güvenli Bahçede{" "}
-            <span className="text-[var(--blush)]">{gardenPlay.accent}</span>
-          </h2>
-          <div className="mt-6 max-w-xl space-y-4 text-base leading-relaxed text-[var(--muted)] md:text-lg">
-            {gardenPlay.paragraphs.map((p) => (
-              <p key={p.slice(0, 28)}>{p}</p>
-            ))}
-          </div>
-        </ScrollReveal>
-        <ScrollReveal delay={0.08}>
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[22px] sm:aspect-[5/4] lg:aspect-[4/5]">
-            <Image
-              src={photos.garden}
-              alt="Çocuklar bahçede oynuyor"
-              fill
-              sizes="(max-width:1024px) 100vw, 50vw"
-              className="object-cover"
-            />
-          </div>
-        </ScrollReveal>
-      </div>
-    </section>
-  );
-}
 
 export function AgeGroups() {
   return (
