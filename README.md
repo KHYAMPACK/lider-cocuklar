@@ -1,37 +1,30 @@
-# Özel Denizli Lider Çocuklar Anaokulu
+# Özel Denizli Lider Çocuklar Anaokulu — Website
 
-Cute Next.js website for the kindergarten in Merkezefendi / Denizli.
+**Website for a kindergarten in Merkezefendi, Denizli.**
 
-## Stack
+🌐 Live: [denizlilidercocuklaranaokulu.com](https://denizlilidercocuklaranaokulu.com) · Built by [Ekiz Yazılım](https://ekizyazilim.com)
 
-- Next.js (App Router) + TypeScript + Tailwind CSS
-- Deploy target: Vercel
+## Overview
 
-## Develop
+- Pages: home, about, programs, gallery, FAQ, contact, privacy
+- GSAP scroll animations, intro loader, activity corridor and school-life galleries
+- Contact form with unit tests (Vitest)
+- Local SEO: JSON-LD structured data, sitemap, consistent contact details (NAP)
+- CI on every push/PR: lint → typecheck → tests → build
+
+**Stack:** Next.js (App Router) · React · TypeScript · Tailwind CSS · GSAP / Motion · Vitest · Vercel
+
+## Development
 
 ```bash
 npm install
 npm run dev
-```
-
-## Build
-
-```bash
-npm run build
-npm start
+npm test
 ```
 
 ## Deploy
 
-Hosted on [Vercel](https://vercel.com). Production deploys from the production branch.
-
-CI on push and pull request runs `npm run lint`, `npm run typecheck`, `npm test`, and `npm run build`.
-
-Rollback: Vercel → Deployments → promote the previous production deployment.
-
-Production URL: https://denizlilidercocuklaranaokulu.com
-
-After DNS is live, set an uptime check on that URL.
+Hosted on Vercel. Production deploys from the production branch. To roll back, go to Vercel → Deployments and promote the previous deploy.
 
 ## Contact (NAP)
 
